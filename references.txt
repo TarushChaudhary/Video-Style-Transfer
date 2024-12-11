@@ -1,0 +1,8 @@
+TransformerNet Architecture:
+
+https://arxiv.org/pdf/1607.08022.pdf
+https://arxiv.org/pdf/1603.08155
+
+
+VGG for Perceptual i.e Content Loss
+https://github.com/pytorch/vision/blob/3c254fb7af5f8af252c24e89949c54a3461ff0be/torchvision/models/vgg.py
