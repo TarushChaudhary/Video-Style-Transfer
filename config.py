@@ -25,7 +25,7 @@ CHECKPOINT_FREQ = 2000
 
 # INFERENCE PARAMETERS
 CONTENT_IMAGES_PATH = os.path.join(os.path.dirname(__file__), 'data', 'content-images')
-OUTPUT_IMAGES_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output-images')
+OUTPUT_IMAGES_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output-stylized-images')
 CONTENT_INPUT = 'taj_mahal.jpg'  # Content image(s) to stylize
 INFERENCE_BATCH_SIZE = 5  # Batch size for directory processing
 INFERENCE_IMG_WIDTH = 500  # Resize content image to this width

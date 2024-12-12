@@ -3,3 +3,4 @@ data/content/mscoco/*.jpg
 *.jpg
 .gitignore
 imp/*
+.cursorignore
