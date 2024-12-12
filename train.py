@@ -14,7 +14,9 @@ import config
 
 
 def train(training_config):
-    writer = SummaryWriter()  # (tensorboard) writer will output to ./runs/ directory by default
+    # Create a unique log directory for each style
+    log_dir = os.path.join('runs', f"style_{training_config['style_img_name'].split('.')[0]}")
+    writer = SummaryWriter(log_dir=log_dir)  # Specify unique log directory for each style
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # prepare data loader
@@ -111,7 +113,7 @@ def train(training_config):
 
 
 if __name__ == "__main__":
-    assert os.path.exists(config.DATASET_PATH), f'MS COCO missing. Download the dataset using resource_downloader.py script.'
+    assert os.path.exists(config.DATASET_PATH), f'MS COCO missing. Download the dataset.'
     os.makedirs(config.MODEL_BINARIES_PATH, exist_ok=True)
 
     # Get training configuration

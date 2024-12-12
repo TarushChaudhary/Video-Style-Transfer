@@ -4,12 +4,12 @@ import torch
 from torchvision import models
 
 
-class Vgg16(torch.nn.Module):
+class Vgg19(torch.nn.Module):
     """Only those layers are exposed which have already proven to work nicely."""
     def __init__(self, requires_grad=False, show_progress=False):
         super().__init__()
         # Keeping eval() mode only for consistency - it only affects BatchNorm and Dropout both of which we won't use
-        vgg16 = models.vgg16(pretrained=True, progress=show_progress).eval()
+        vgg16 = models.vgg19(weights=models.VGG19_Weights.DEFAULT, progress=show_progress).eval()
         vgg_pretrained_features = vgg16.features
         self.layer_names = ['relu1_2', 'relu2_2', 'relu3_3', 'relu4_3']
 
@@ -46,4 +46,4 @@ class Vgg16(torch.nn.Module):
 
 
 # Set the perceptual loss network to be VGG16
-PerceptualLossNet = Vgg16
+PerceptualLossNet = Vgg19
