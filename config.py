@@ -9,12 +9,12 @@ IMAGE_SIZE = 256  # training images from MS COCO are resized to image_size x ima
 BATCH_SIZE = 4
 
 # Training configuration
-STYLE_IMG_NAME = 'train_3.jpeg'
+STYLE_IMG_NAME = 'train_1.jpeg'
 CONTENT_WEIGHT = 1e0
 STYLE_WEIGHT = 4e5
 TV_WEIGHT = 0
 NUM_OF_EPOCHS = 2
-SUBSET_SIZE = None  # number of MS COCO images to use, None means all (~83k)
+SUBSET_SIZE = 40000  # number of MS COCO images to use, None means all (~83k)
 
 # Logging configuration
 ENABLE_TENSORBOARD = True
@@ -29,14 +29,14 @@ OUTPUT_IMAGES_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output-sty
 CONTENT_INPUT = 'taj_mahal.jpg'  # Content image(s) to stylize
 INFERENCE_BATCH_SIZE = 5  # Batch size for directory processing
 INFERENCE_IMG_WIDTH = 500  # Resize content image to this width
-INFERENCE_MODEL_NAME = 'mosaic_4e5_e2.pth'  # Model binary to use for stylization
-SHOULD_DISPLAY = True  # Should display the stylized result
+INFERENCE_MODEL_NAME = 'starry.pth'  # Model binary to use for stylization
+SHOULD_DISPLAY = False  # Should display the stylized result
 VERBOSE = False  # Print model metadata
 REDIRECTED_OUTPUT = None  # Overwrite default output dir
 
 # VIDEO PARAMETERS
 VIDEO_INPUT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'content-videos')
-VIDEO_OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output-videos')
+VIDEO_OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'output-stylized-TC')
 TEMPORAL_WEIGHT = 1e4  # Weight for temporal consistency loss
 FLOW_WEIGHT = 1.0  # Weight for optical flow consistency
 MULTI_PASS = True  # Whether to use multi-pass processing

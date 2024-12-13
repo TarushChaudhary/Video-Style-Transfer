@@ -39,9 +39,16 @@ def estimate_optical_flow(frame1, frame2, method='farneback'):
 def warp_image(image, flow):
     """Warp image using cv2's remap"""
     if torch.is_tensor(image):
-        image = image.cpu().numpy()
+        # Detach from computation graph before converting to numpy
+        image = image.detach().cpu().numpy()
     if torch.is_tensor(flow):
-        flow = flow.cpu().numpy()
+        flow = flow.detach().cpu().numpy()
+    
+    # Handle different input dimensions
+    if len(image.shape) == 4:  # (B,C,H,W)
+        image = image.squeeze(0)  # Remove batch dimension
+    if len(flow.shape) == 4:   # (B,C,H,W)
+        flow = flow.squeeze(0)  # Remove batch dimension
     
     h, w = flow.shape[1:3]
     
@@ -100,10 +107,12 @@ def compute_consistency_mask(flow_forward, flow_backward, threshold=0.01):
     
     # Ensure flow tensors are on the same device
     device = flow_forward.device
+    flow_forward = flow_forward.to(device)
     flow_backward = flow_backward.to(device)
     
     # Warp backward flow with forward flow
-    warped_backward = warp_image(flow_backward.unsqueeze(0), flow_forward).squeeze(0)
+    warped_backward = warp_image(flow_backward.unsqueeze(0), flow_forward)
+    warped_backward = warped_backward.to(device)  # Ensure warped result is on same device
     
     # Calculate consistency error
     consistency_error = torch.norm(flow_forward + warped_backward, dim=0)
@@ -227,3 +236,18 @@ def compute_blend_weight(pass_idx, num_passes):
     elif pass_idx > 2 * num_passes // 3:
         return base_weight * 0.8  # More blending in later passes
     return base_weight
+
+def read_video_frames(video_path):
+    """Read video frames from a file and return them as a list of numpy arrays."""
+    cap = cv2.VideoCapture(video_path)
+    frames = []
+    
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frames.append(frame)
+    
+    cap.release()
+    return frames

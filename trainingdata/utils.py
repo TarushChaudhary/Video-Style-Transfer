@@ -15,7 +15,6 @@ import git
 IMAGENET_MEAN_1 = np.array([0.485, 0.456, 0.406])
 IMAGENET_STD_1 = np.array([0.229, 0.224, 0.225])
 IMAGENET_MEAN_255 = np.array([123.675, 116.28, 103.53])
-# Usually when normalizing 0..255 images only mean-normalization is performed -> that's why standard dev is all 1s here
 IMAGENET_STD_NEUTRAL = np.array([1, 1, 1])
 
 
@@ -46,7 +45,7 @@ class SimpleDataset(Dataset):
 def load_image(img_path, target_shape=None):
     if not os.path.exists(img_path):
         raise Exception(f'Path does not exist: {img_path}')
-    img = cv.imread(img_path)[:, :, ::-1]  # [:, :, ::-1] converts BGR (opencv format...) into RGB
+    img = cv.imread(img_path)[:, :, ::-1]  
 
     if target_shape is not None:  # resize section
         if isinstance(target_shape, int) and target_shape != -1:  # scalar -> implicitly setting the width
@@ -57,14 +56,19 @@ def load_image(img_path, target_shape=None):
         else:  # set both dimensions to target shape
             img = cv.resize(img, (target_shape[1], target_shape[0]), interpolation=cv.INTER_CUBIC)
 
-    # this need to go after resizing - otherwise cv.resize will push values outside of [0,1] range
-    img = img.astype(np.float32)  # convert from uint8 to float32
+    img = img.astype(np.float32) 
     img /= 255.0  # get to [0, 1] range
     return img
 
 
 def prepare_img(img_path, target_shape, device, batch_size=1, should_normalize=True, is_255_range=False):
-    img = load_image(img_path, target_shape=target_shape)
+    # Handle both file paths and numpy arrays
+    if isinstance(img_path, str):
+        img = load_image(img_path, target_shape=target_shape)
+    elif isinstance(img_path, np.ndarray):
+        img = img_path.astype(np.float32) / 255.0  # Convert to float32 and normalize to [0,1]
+    else:
+        img = None
 
     transform_list = [transforms.ToTensor()]
     if is_255_range:
@@ -112,20 +116,21 @@ def save_and_maybe_display_image(inference_config, dump_img, should_display=Fals
     if inference_config['redirected_output'] is None:
         dump_dir = inference_config['output_images_path']
         dump_img_name = os.path.basename(inference_config['content_input']).split('.')[0] + '_width_' + str(inference_config['img_width']) + '_model_' + inference_config['model_name'].split('.')[0] + '.jpg'
-    else:  # useful when this repo is used as a utility submodule in some other repo like pytorch-naive-video-nst
+    else:
         dump_dir = inference_config['redirected_output']
         os.makedirs(dump_dir, exist_ok=True)
         dump_img_name = get_next_available_name(inference_config['redirected_output'])
 
-    cv.imwrite(os.path.join(dump_dir, dump_img_name), dump_img[:, :, ::-1])  # ::-1 because opencv expects BGR (and not RGB) format...
+    cv.imwrite(os.path.join(dump_dir, dump_img_name), dump_img[:, :, ::-1]) 
 
     # Don't print this information in batch stylization mode
     if inference_config['verbose'] and not os.path.isdir(inference_config['content_input']):
         print(f'Saved image to {dump_dir}.')
 
     if should_display:
-        plt.imshow(dump_img)
-        plt.show()
+        #plt.imshow(dump_img)
+        #plt.show()
+        pass
 
 
 class SequentialSubsetSampler(Sampler):
@@ -140,7 +145,7 @@ class SequentialSubsetSampler(Sampler):
         assert isinstance(data_source, Dataset) or isinstance(data_source, datasets.ImageFolder)
         self.data_source = data_source
 
-        if subset_size is None:  # if None -> use the whole dataset
+        if subset_size is None:  
             subset_size = len(data_source)
         assert 0 < subset_size <= len(data_source), f'Subset size should be between (0, {len(data_source)}].'
         self.subset_size = subset_size
@@ -185,7 +190,6 @@ def gram_matrix(x, should_normalize=True):
     return gram
 
 
-# Not used atm, you'd want to use this if you choose to go with 0..255 images in the training loader
 def normalize_batch(batch):
     batch /= 255.0
     mean = batch.new_tensor(IMAGENET_MEAN_1).view(-1, 1, 1)
@@ -227,7 +231,6 @@ def print_header(training_config):
 def get_training_metadata(training_config):
     num_of_datapoints = training_config['subset_size'] * training_config['num_of_epochs']
     training_metadata = {
-        "commit_hash": git.Repo(search_parent_directories=True).head.object.hexsha,
         "content_weight": training_config['content_weight'],
         "style_weight": training_config['style_weight'],
         "tv_weight": training_config['tv_weight'],
@@ -258,3 +261,64 @@ def dir_contains_only_models(path):
 # Count how many trainable weights the model has <- just for having a feeling for how big the model is
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def save_image(tensor, path):
+    """Save a tensor as an image.
+    
+    Args:
+        tensor (torch.Tensor): Image tensor in format (C,H,W) or (B,C,H,W)
+        path (str): Path to save the image
+    """
+    import torch
+    import numpy as np
+    
+    # Convert tensor to numpy array
+    if torch.is_tensor(tensor):
+        # Remove batch dimension if present
+        if len(tensor.shape) == 4:
+            tensor = tensor.squeeze(0)
+        
+        # Move to CPU and convert to numpy
+        image = tensor.detach().cpu().numpy()
+    else:
+        image = tensor
+        
+    # Transpose from (C,H,W) to (H,W,C) if needed
+    if len(image.shape) == 3 and image.shape[0] in [1, 3, 4]:
+        image = image.transpose(1, 2, 0)
+    
+    # Scale to [0, 255] if in [0, 1]
+    if image.max() <= 1.0:
+        image = (image * 255).astype(np.uint8)
+    
+    # Handle single-channel images
+    if len(image.shape) == 2 or image.shape[-1] == 1:
+        # For single-channel images (like masks), replicate to 3 channels
+        image = cv.cvtColor(image, cv.COLOR_GRAY2BGR)
+    
+    # Convert from RGB to BGR for cv2
+    if image.shape[-1] == 3:  # Only convert if image is in RGB
+        image = cv.cvtColor(image, cv.COLOR_RGB2BGR)
+    
+    # Save the image
+    cv.imwrite(path, image)
+
+def save_video(frames, output_path, fps=30):
+    """
+    Save a list of frames as a video file
+    frames: list of numpy arrays in format (H, W, C) with values in range [0, 255]
+    """
+    if not frames:
+        raise ValueError("No frames to save")
+        
+    height, width, channels = frames[0].shape
+    fourcc = cv.VideoWriter_fourcc(*'mp4v')
+    out = cv.VideoWriter(output_path, fourcc, fps, (width, height))
+    
+    for frame in frames:
+        # Convert RGB to BGR for OpenCV
+        frame_bgr = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
+        out.write(frame_bgr)
+    
+    out.release()

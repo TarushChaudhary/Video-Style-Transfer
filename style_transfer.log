@@ -1,0 +1,103 @@
+2024-12-13 07:54:25,178 - INFO - Using device: cuda
+2024-12-13 07:54:25,179 - ERROR - Path validation failed: Model file not found: mosaic.pth
+2024-12-13 07:54:25,179 - ERROR - Path validation failed. Exiting.
+2024-12-13 07:56:39,413 - INFO - Using device: cuda
+2024-12-13 07:56:39,414 - ERROR - Path validation failed: Model file not found: mosaic.pth
+2024-12-13 07:56:39,414 - ERROR - Path validation failed. Exiting.
+2024-12-13 07:57:23,432 - INFO - Using device: cuda
+2024-12-13 07:57:23,433 - ERROR - Path validation failed: Model file not found: mosaic.pth
+2024-12-13 07:57:23,433 - ERROR - Path validation failed. Exiting.
+2024-12-13 07:57:49,809 - INFO - Using device: cuda
+2024-12-13 07:57:49,810 - INFO - Processing simple video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 07:57:52,426 - INFO - Process interrupted by user
+2024-12-13 07:58:15,761 - INFO - Using device: cuda
+2024-12-13 07:58:15,761 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 07:58:16,187 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with mosaic.pth: No frames to save
+2024-12-13 07:58:16,188 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with mosaic.pth
+2024-12-13 07:58:16,191 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: starry.pth
+2024-12-13 07:58:16,340 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with starry.pth: No frames to save
+2024-12-13 07:58:16,341 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with starry.pth
+2024-12-13 07:58:16,343 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: colorful.pth
+2024-12-13 07:58:16,535 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with colorful.pth: No frames to save
+2024-12-13 07:58:16,535 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with colorful.pth
+2024-12-13 07:58:16,538 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: fuzzy.pth
+2024-12-13 07:58:16,725 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with fuzzy.pth: No frames to save
+2024-12-13 07:58:16,725 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with fuzzy.pth
+2024-12-13 07:58:16,728 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: mosaic.pth
+2024-12-13 07:58:16,909 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with mosaic.pth: No frames to save
+2024-12-13 07:58:16,909 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with mosaic.pth
+2024-12-13 07:58:16,912 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: starry.pth
+2024-12-13 07:58:17,052 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with starry.pth: No frames to save
+2024-12-13 07:58:17,052 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with starry.pth
+2024-12-13 07:58:17,054 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: colorful.pth
+2024-12-13 07:58:17,236 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with colorful.pth: No frames to save
+2024-12-13 07:58:17,236 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with colorful.pth
+2024-12-13 07:58:17,239 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: fuzzy.pth
+2024-12-13 07:58:17,421 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with fuzzy.pth: No frames to save
+2024-12-13 07:58:17,421 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with fuzzy.pth
+2024-12-13 07:58:17,425 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: mosaic.pth
+2024-12-13 07:58:17,592 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with mosaic.pth: No frames to save
+2024-12-13 07:58:17,593 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with mosaic.pth
+2024-12-13 07:58:17,596 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: starry.pth
+2024-12-13 07:58:17,732 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with starry.pth: No frames to save
+2024-12-13 07:58:17,733 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with starry.pth
+2024-12-13 07:58:17,735 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: colorful.pth
+2024-12-13 07:58:17,916 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with colorful.pth: No frames to save
+2024-12-13 07:58:17,917 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with colorful.pth
+2024-12-13 07:58:17,920 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: fuzzy.pth
+2024-12-13 07:58:18,099 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with fuzzy.pth: No frames to save
+2024-12-13 07:58:18,099 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with fuzzy.pth
+2024-12-13 07:58:18,103 - INFO - Processing multi pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 07:58:18,277 - ERROR - Error in multi pass processing - data/content-videos/test-video-1.mp4 with mosaic.pth: No frames to save
+2024-12-13 07:58:18,278 - ERROR - Failed multi pass processing for data/content-videos/test-video-1.mp4 with mosaic.pth
+2024-12-13 07:58:18,281 - INFO - Processing multi pass video: data/content-videos/test-video-1.mp4 with model: starry.pth
+2024-12-13 07:58:18,290 - INFO - Process interrupted by user
+2024-12-13 08:01:13,965 - INFO - Using device: cuda
+2024-12-13 08:01:13,965 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 08:01:14,395 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with mosaic.pth: No frames to save
+2024-12-13 08:01:14,395 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with mosaic.pth
+2024-12-13 08:01:14,398 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: starry.pth
+2024-12-13 08:01:14,540 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with starry.pth: No frames to save
+2024-12-13 08:01:14,540 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with starry.pth
+2024-12-13 08:01:14,543 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: colorful.pth
+2024-12-13 08:01:14,745 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with colorful.pth: No frames to save
+2024-12-13 08:01:14,747 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with colorful.pth
+2024-12-13 08:01:14,748 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: fuzzy.pth
+2024-12-13 08:01:14,952 - ERROR - Error in single pass processing - data/content-videos/test-video-1.mp4 with fuzzy.pth: No frames to save
+2024-12-13 08:01:14,952 - ERROR - Failed single pass processing for data/content-videos/test-video-1.mp4 with fuzzy.pth
+2024-12-13 08:01:14,957 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: mosaic.pth
+2024-12-13 08:01:15,137 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with mosaic.pth: No frames to save
+2024-12-13 08:01:15,138 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with mosaic.pth
+2024-12-13 08:01:15,142 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: starry.pth
+2024-12-13 08:01:15,361 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with starry.pth: No frames to save
+2024-12-13 08:01:15,362 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with starry.pth
+2024-12-13 08:01:15,365 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: colorful.pth
+2024-12-13 08:01:15,576 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with colorful.pth: No frames to save
+2024-12-13 08:01:15,576 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with colorful.pth
+2024-12-13 08:01:15,580 - INFO - Processing single pass video: data/content-videos/test-video-2.mp4 with model: fuzzy.pth
+2024-12-13 08:01:15,768 - ERROR - Error in single pass processing - data/content-videos/test-video-2.mp4 with fuzzy.pth: No frames to save
+2024-12-13 08:01:15,768 - ERROR - Failed single pass processing for data/content-videos/test-video-2.mp4 with fuzzy.pth
+2024-12-13 08:01:15,772 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: mosaic.pth
+2024-12-13 08:01:15,942 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with mosaic.pth: No frames to save
+2024-12-13 08:01:15,942 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with mosaic.pth
+2024-12-13 08:01:15,947 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: starry.pth
+2024-12-13 08:01:16,086 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with starry.pth: No frames to save
+2024-12-13 08:01:16,087 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with starry.pth
+2024-12-13 08:01:16,089 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: colorful.pth
+2024-12-13 08:01:16,281 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with colorful.pth: No frames to save
+2024-12-13 08:01:16,282 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with colorful.pth
+2024-12-13 08:01:16,284 - INFO - Processing single pass video: data/content-videos/test-video-3.mp4 with model: fuzzy.pth
+2024-12-13 08:01:16,478 - ERROR - Error in single pass processing - data/content-videos/test-video-3.mp4 with fuzzy.pth: No frames to save
+2024-12-13 08:01:16,478 - ERROR - Failed single pass processing for data/content-videos/test-video-3.mp4 with fuzzy.pth
+2024-12-13 08:03:49,296 - INFO - Using device: cuda
+2024-12-13 08:03:49,297 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 08:03:53,219 - INFO - Process interrupted by user
+2024-12-13 08:04:16,144 - INFO - Using device: cuda
+2024-12-13 08:04:16,145 - INFO - Processing multi pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 08:04:18,199 - INFO - Process interrupted by user
+2024-12-13 08:04:52,191 - INFO - Using device: cuda
+2024-12-13 08:04:52,192 - INFO - Processing simple video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 08:04:58,261 - INFO - Process interrupted by user
+2024-12-13 08:18:00,550 - INFO - Using device: cuda
+2024-12-13 08:18:00,551 - INFO - Processing single pass video: data/content-videos/test-video-1.mp4 with model: mosaic.pth
+2024-12-13 08:18:03,610 - INFO - Process interrupted by user

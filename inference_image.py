@@ -1,7 +1,7 @@
 import os
 import torch
 from torch.utils.data import DataLoader
-import utils as utils
+import trainingdata.utils as utils
 from TransformerModel.model import TransformerNet
 from config import get_inference_config
 
@@ -47,15 +47,27 @@ def stylize_static_image(inference_config):
             utils.save_and_maybe_display_image(inference_config, stylized_img, should_display=inference_config['should_not_display'])
 
 
-if __name__ == "__main__":
-    # Get configuration from config.py
+def stylize_single_image(input_file, model_name):    # Get configuration from config.py
     inference_config = get_inference_config()
     
     assert utils.dir_contains_only_models(inference_config['model_binaries_path']), f'Model directory should contain only model binaries.'
     os.makedirs(inference_config['output_images_path'], exist_ok=True)
+    inference_config['model_name'] = model_name
+    inference_config['content_input'] = input_file
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # if redirected output is not set when doing batch stylization set to default image output location
-    if os.path.isdir(inference_config['content_input']) and inference_config['redirected_output'] is None:
-        inference_config['redirected_output'] = inference_config['output_images_path']
+    # Prepare the model - load the weights and put the model into evaluation mode
+    stylization_model = TransformerNet().to(device)
+    training_state = torch.load(os.path.join(inference_config["model_binaries_path"], inference_config["model_name"]))
+    state_dict = training_state["state_dict"]
+    stylization_model.load_state_dict(state_dict, strict=True)
+    stylization_model.eval()
 
-    stylize_static_image(inference_config)
+    if inference_config['verbose']:
+        utils.print_model_metadata(training_state)
+
+    with torch.no_grad():
+        content_img_path = os.path.join(inference_config['content_images_path'], inference_config['content_input'])
+        content_image = utils.prepare_img(content_img_path, inference_config['img_width'], device)
+        stylized_img = stylization_model(content_image).to('cpu').numpy()[0]
+        utils.save_and_maybe_display_image(inference_config, stylized_img, should_display=inference_config['should_not_display'])
