@@ -4,3 +4,5 @@ data/content/mscoco/*.jpg
 .gitignore
 imp/*
 .cursorignore
+models/checkpoints/*
+report.md
